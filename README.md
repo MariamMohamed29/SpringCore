@@ -265,6 +265,69 @@ public class DemoApplication {
 ```java
 Student{name='Tina', age='21'}
 ```
+##  ApplicationContext
+ApplicationContext belongs to the Spring framework. Spring IoC container is responsible for instantiating, wiring, configuring, and managing the entire life cycle of beans or objects. BeanFactory and ApplicationContext represent the Spring IoC Containers. ApplicationContext is the sub-interface of BeanFactory. It is used when we are creating an enterprise-level application or web application. ApplicationContext is the superset of BeanFactory, whatever features provided by BeanFactory are also provided by ApplicationContext.
+### ApplicationContext Implementation Classes
+There are different types of Application containers provided by Spring for different requirements as listed below which later onwards are described alongside with declaration,Containers are as follows:
+
+1-AnnotationConfigApplicationContext container 
+
+2-AnnotationConfigWebApplicationContext
+
+3-XmlWebApplicationContext
+
+4-FileSystemXmlApplicationContext
+
+5-ClassPathXmlApplicationContext
+
+**Example**
+
+Assume you have a Car class with properties:
+```java
+public class Car {
+    private String brand;
+    private String model;
+
+    // getters and setters
+}
+```
+Define a bean for this class in an XML configuration file (beans.xml):
+
+```java
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="myCar" class="com.example.Car">
+        <property name="brand" value="Toyota"/>
+        <property name="model" value="Camry"/>
+    </bean>
+
+</beans>
+```
+Access the ApplicationContext in a Java application:
+
+```java
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class MainApp {
+
+    public static void main(String[] args) {
+        // Load the application context
+        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+
+        // Get the car bean
+        Car myCar = (Car) context.getBean("myCar");
+
+        // Use the car
+        System.out.println("Brand: " + myCar.getBrand());
+        System.out.println("Model: " + myCar.getModel());
+    }
+}
+```
+
+
 ## Dependency Injection with Example
 Dependency Injection is the main functionality provided by Spring IOC(Inversion of Control). The Spring-Core module is responsible for injecting dependencies through either Constructor or Setter methods. The design principle of Inversion of Control emphasizes keeping the Java classes independent of each other and the container frees them from object creation and maintenance. These classes, managed by Spring, must adhere to the standard definition of Java-Bean. Dependency Injection in Spring also ensures loose-coupling between the classes.
 ### Need for Dependency Injection:
