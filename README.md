@@ -416,6 +416,17 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
           
 </beans>
 ```
+## Setter Injection with Collection
+Dependency Injection is the main functionality provided by Spring IOC(Inversion of Control). The Spring-Core module is responsible for injecting dependencies through either Constructor or Setter methods. In Setter Dependency Injection(SDI) the dependency will be injected with the help of setters and getters methods. A bean-configuration file is used to set DI as SDI in the bean. For this, the property to be set with the SDI is declared under the <property> tag in the bean-config file.
+
+A Collection in java is a group of individual objects. Spring framework provides us facility of Setter injection using the following Collections:
+
+-List
+
+-Map
+
+-Set
+
 
 
 
