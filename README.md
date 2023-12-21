@@ -81,4 +81,82 @@ public interface Sim
     void data();
 }
 ```
+Now we have created another two classes Airtel and Jio which implement the Sim interface and override the interface methods.
+
+```java
+// Java Program to Illustrate Airtel Class
+ 
+// Class
+// Implementing Sim interface
+public class Airtel implements Sim {
+ 
+    @Override public void calling()
+    {
+        System.out.println("Airtel Calling");
+    }
+ 
+    @Override public void data()
+    {
+        System.out.println("Airtel Data");
+    }
+}
+```
+```java
+// Java Program to Illustrate Jio Class
+ 
+// Class
+// Implementing Sim interface
+public class Jio implements Sim{
+    @Override
+    public void calling() {
+        System.out.println("Jio Calling");
+    }
+ 
+    @Override
+    public void data() {
+        System.out.println("Jio Data");
+    }
+}
+```
+
+So let’s now call these methods inside the main method
+
+```java
+// Java Program to Illustrate Mobile Class
+ 
+// Class
+public class Mobile {
+ 
+    // Main driver method
+    public static void main(String[] args)
+    {
+ 
+        // Creating instance of Sim interface
+        // inside main() method
+        // with reference to Jio class constructor
+        // invocation
+        Sim sim = new Jio();
+ 
+        // Sim sim = new Airtel();
+ 
+        sim.calling();
+        sim.data();
+    }
+}
+```
+
+But what happens if in the future another new Sim Vodafone came and we need to change again to the child class name in the code,So we have to do our configuration in the source code. So how to make it configurable? We don’t want to touch the source code of this. The source code should be constant. And how can we make it? Here Spring IoC comes into the picture. So in this example, we are going to use ApplicationContext to implement an IoC container. First, we have to create an XML file and name the file as “beans.xml“.
+
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+ 
+  <bean id="sim" class="Jio"></bean>
+ 
+</beans>
+```
+
 
