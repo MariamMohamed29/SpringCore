@@ -184,6 +184,88 @@ public class Mobile {
 Jio Calling
 Jio Data
 ```
+## BeanFactory
+The first and foremost thing when we talk about spring is dependency injection which is possible because spring is actually a container and behaves as a factory of Beans. Just like the  BeanFactory interface is the simplest container providing an advanced configuration mechanism to instantiate, configure, and manage the life cycle of beans. Beans are Java objects that are configured at run-time by Spring IoC Container. BeanFactory represents a basic IoC container which is a parent interface of ApplicationContext. BeanFactory uses Beans and their dependencies metadata to create and configure them at run-time. BeanFactory loads the bean definitions and dependency amongst the beans based on a configuration file(XML) or the beans can be directly returned when required using Java Configuration. There are other types of configuration files like LDAP, RDMS, properties files, etc. BeanFactory does not support Annotation-based configuration whereas ApplicationContext does.
+### Procedure:
+1-Creating a Spring project using start.spring.io.
+
+2-Creating a POJO class.
+
+3-Configure the Student bean in the bean-factory-demo.xml file.
+
+4-Writing it to application class.
+
+### Implementation:
+
+**Step 1:** Bean Definition: Create a Student POJO class.
+```java
+// Java Program where we are
+// creating a POJO class
+
+// POJO class
+public class Student {
+
+  // Member variables
+  private String name;
+  private String age;
+
+  // Constructor 1
+  public Student() {
+  }
+
+  // Constructor 2
+  public Student(String name, String age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  // Method inside POJO class
+  @Override
+  public String toString() {
+
+    // Print student class attributes
+    return "Student{" + "name='" + name + '\'' + ", age='" + age + '\'' + '}';
+  }
+}
+```
+**Step 2:** XML Bean Configuration: Configure the Student bean in the bean-factory-demo.xml file.XML
+```java
+<?xml version = "1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd">
+            
+    <bean id="student" class = "com.gfg.demo.domain.Student">
+       <constructor-arg name="name" value="Tina"/>
+       <constructor-arg name="age" value="21"/>
+    </bean>
+</beans>
+```
+**Step 3:** Main Class
+```java
+// Application class 
+@SpringBootApplication
+
+// Main class
+public class DemoApplication {
+
+  // Main driver method
+  public static void main(String[] args) {
+
+    // Creating object in a spring container (Beans)
+    BeanFactory factory = new ClassPathXmlApplicationContext("bean-factory-demo.xml");
+    Student student = (Student) factory.getBean("student");
+
+    System.out.println(student);
+  }
+}
+```
+**Output:**
+```java
+Student{name='Tina', age='21'}
+```
+
 
 
 
