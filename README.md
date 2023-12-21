@@ -45,11 +45,18 @@ We’ll discuss reasons to use the Spring Framework in the projects in this repo
 7. **Follows Aspect-Oriented Programming** 
    Aspect-Oriented Programming allows us to think differently about the structure of the program by enabling the modularization of concerns. It helps in breaking down the logic into 
    parts known as concerns and the concerns help in dividing the business logic of an application and in increasing the modularity.
-8. Testing becomes easy
+8. **Testing becomes easy**
    The feature of dependency injection makes frameworks more testable and this is one of the reasons that Spring is good for testing purposes. Loose coupling also helps in unit testing 
    as this way classes can be tested independently without having to depend on one another. It is not good to test complex projects in one go hence, Spring plays as a good option to 
    develop projects as it is easy to test their functionality.
 10. **Handle external resources easily** 
     Spring handles not only internal resources but also external resources efficiently such as property files, image files, and XML files. Resource and ResourceLoader are the interfaces 
     present in Spring to handle external resources.
+
+## Understanding Inversion of Control with Example
+Spring IoC (Inversion of Control) Container is the core of Spring Framework. It creates the objects, configures and assembles their dependencies, manages their entire life cycle. The Container uses Dependency Injection(DI) to manage the components that make up the application. It gets the information about the objects from a configuration file(XML) or Java Code or Java Annotations and Java POJO class. These objects are called Beans. Since the Controlling of Java objects and their lifecycle is not done by the developers, hence the name Inversion Of Control.
+There are 2 types of IoC containers:
+
+-BeanFactory 
+-ApplicationContext 
 
