@@ -1,1 +1,18 @@
 # SpringCore
+
+## Introduction to Spring Framework
+
+### What is Spring?
+
+Spring Framework is a Java platform that provides comprehensive infrastructure support for developing Java applications. Spring handles the infrastructure so you can focus on your application.
+Spring enables you to build applications from “plain old Java objects” (POJOs) and to apply enterprise services non-invasively to POJOs. This capability applies to the Java SE programming model and to full and partial Java EE.
+
+#### Examples of how you, as an application developer, can use the Spring platform advantage:
+
+-Make a Java method execute in a database transaction without having to deal with transaction APIs.
+
+-Make a local Java method a remote procedure without having to deal with remote APIs.
+
+-Make a local Java method a management operation without having to deal with JMX APIs.
+
+-Make a local Java method a message handler without having to deal with JMS APIs.
