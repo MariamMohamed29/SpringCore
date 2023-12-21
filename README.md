@@ -496,6 +496,33 @@ class Company {
     </bean>  
 </beans>
 ```
+**Initializing Sets**
+```java
+ <bean id="company" class="com.geeksforgeeks.org.Company">  
+        <property name="companyName" value="Penta-b"></property>  
+        <property name="employees">
+            <set>
+                 <value>"John"</value>
+                <value>"Max"</value>
+                <value>"Sam"</value>
+             </set>
+         </property>
+    </bean>
+```
+**Initializing Maps**
+```java
+ <bean id="company" class="com.geeksforgeeks.org.Company">  
+        <property name="companyName" value="Penta-b"></property>  
+        <property name="employees">
+            <map>
+                 <entry key="Key 1" value="John"/>
+                 <entry key="Key 2" value="Max"/>
+                 <entry key="Key 3" value="Sam"/>
+             </map>
+         </property>
+    </bean>
+```
+
 **3. Main.java**
 ```java
 
