@@ -20,6 +20,7 @@ Spring enables you to build applications from “plain old Java objects” (POJO
 There are many reasons for which Spring is one of the best choices for developing our project as it is open-source, stable, and many more. It is one of the most trusted frameworks for building projects or developing enterprise applications when working with the Java tech stack and projects written in Java are more secure and robust.
 We’ll discuss reasons to use the Spring Framework in the projects in this repository:
 1. **Easy, Simple, and Lightweight**
+   
    -Let’s admit that we look for easier things first! Spring is easy to learn and implement which is composed of modules where we can write spring applications normally with interfaces 
     and abstract classes just like java applications.
    -Spring helps in coupling and wiring the components which make working with Spring easier and simpler as we can focus more on our application rather than its implementation.
