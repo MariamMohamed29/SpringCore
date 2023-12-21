@@ -58,5 +58,16 @@ Spring IoC (Inversion of Control) Container is the core of Spring Framework. It 
 
 #### There are 2 types of IoC containers:
 -BeanFactory 
+
 -ApplicationContext 
+
+The BeanFactory is the most basic version of IoC containers, and the ApplicationContext extends the features of BeanFactory. The followings are some of the main features of Spring IoC,
+
+-Creating Object for us,
+
+-Managing our objects,
+
+-Helping our application to be configurable,
+
+-Managing dependencies
 
