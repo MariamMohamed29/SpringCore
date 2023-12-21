@@ -158,5 +158,32 @@ But what happens if in the future another new Sim Vodafone came and we need to c
  
 </beans>
 ```
+**Explanation:** In the beans.xml file, we have created beans. So inside the id, we have to pass the unique id and inside the class, we have to pass the Class name for which you want to create the bean. Later on, inside the main method, we can tweek it out that will be described in the upcoming program.
+
+```java
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+ 
+public class Mobile {
+    public static void main(String[] args) {
+        // Using ApplicationContext tom implement Spring IoC
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
+         
+        // Get the bean
+        Sim sim = applicationContext.getBean("sim", Sim.class);
+         
+        // Calling the methods
+        sim.calling();
+        sim.data();
+    }
+}
+```
+**Output:**
+
+```java
+Jio Calling
+Jio Data
+```
+
 
 
