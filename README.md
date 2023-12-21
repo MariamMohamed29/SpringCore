@@ -273,6 +273,7 @@ Suppose class One needs the object of class Two to instantiate or operate a meth
 Spring IOC resolves such dependencies with Dependency Injection, which makes the code easier to test and reuse. Loose coupling between classes can be possible by defining interfaces for common functionality and the injector will instantiate the objects of required implementation. The task of instantiating objects is done by the container according to the configurations specified by the developer.
 ### Types of Spring Dependency Injection:
 There are two types of Spring Dependency Injection. They are:
+
 **1-Setter Dependency Injection (SDI):** This is the simpler of the two DI methods. In this, the DI will be injected with the help of setter and/or getter methods. Now to set the DI as SDI in the bean, it is done through the bean-configuration file For this, the property to be set with the SDI is declared under the <property> tag in the bean-config file.
 
 ```java
