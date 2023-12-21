@@ -293,7 +293,7 @@ public class GFG {
     } 
 }
 ```
-**Setting the SDI in the bean-config file:**
+Setting the SDI in the bean-config file:
 ```java
 
 
