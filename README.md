@@ -422,10 +422,124 @@ Dependency Injection is the main functionality provided by Spring IOC(Inversion 
 A Collection in java is a group of individual objects. Spring framework provides us facility of Setter injection using the following Collections:
 
 -List
-
 -Map
-
 -Set
+### Implementation:
+**1. Company.java**
+```java
+
+// Java program to Illustrate Company Class
+ 
+package com.geeksforgeeks.org;
+ 
+// Importing required classes
+import java.util.*;
+ 
+// Company Class
+class Company {
+ 
+    // Class data members
+    private String companyName;
+    private List<String> employees;
+ 
+    // Setter
+    public void setCompanyName(String companyName)
+    {
+        this.companyName = companyName;
+    }
+ 
+    // Setter
+    public void setEmployees(List<String> employees)
+    {
+        this.employees = employees;
+    }
+ 
+    // Getter
+    public String getCompanyName() { return companyName; }
+ 
+    // Getter
+    public List<String> getEmployees() { return employees; }
+ 
+    // Method
+    public void display()
+    {
+        System.out.println("Company: " + companyName);
+        System.out.println("Employee list: " + companyName);
+ 
+        // Iterating over using for each loop
+        for (String employee : employees) {
+            System.out.println("-" + employee);
+        }
+    }
+}
+```
+**2. applicationContext.xml**
+```java
+
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans 
+    xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:p="http://www.springframework.org/schema/p" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+     http:www.springframework.org/schema/beans/spring-beans-3.0.xsd">  
+   
+    <bean id="company" class="com.geeksforgeeks.org.Company">  
+        <property name="companyName" value="Penta-b"></property>  
+        <property name="employees">
+            <list>
+                 <value>"John"</value>
+                <value>"Max"</value>
+                <value>"Sam"</value>
+             </list>
+         </property>
+    </bean>  
+</beans>
+```
+**3. Main.java**
+```java
+
+// Java Program to Illustrate Application Class
+ 
+package com.geeksforgeeks.org;
+ 
+// Importing required classes
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+ 
+// Application (Main) Class
+public class Main {
+ 
+    // Main driver method
+    public static void main(String[] args)
+    {
+        // Creating a new class path resource
+        Resource resource = new ClassPathResource(
+            "applicationContext.xml");
+ 
+        // Creating an object of BeanFactory class
+        BeanFactory factory = new XmlBeanFactory(resource);
+ 
+        // Creating an object of Employee class
+        Employee e = (Employee)factory.getBean("employee");
+ 
+        // Calling display() method inside main() method
+        e.display();
+    }
+}
+```
+**Output:**
+```java
+Company: penta-b
+Employee list:
+-John
+-Max
+-Sam
+
 
 
 
