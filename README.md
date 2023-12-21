@@ -265,6 +265,94 @@ public class DemoApplication {
 ```java
 Student{name='Tina', age='21'}
 ```
+## Dependency Injection with Example
+Dependency Injection is the main functionality provided by Spring IOC(Inversion of Control). The Spring-Core module is responsible for injecting dependencies through either Constructor or Setter methods. The design principle of Inversion of Control emphasizes keeping the Java classes independent of each other and the container frees them from object creation and maintenance. These classes, managed by Spring, must adhere to the standard definition of Java-Bean. Dependency Injection in Spring also ensures loose-coupling between the classes.
+### Need for Dependency Injection:
+Suppose class One needs the object of class Two to instantiate or operate a method, then class One is said to be dependent on class Two. Now though it might appear okay to depend a module on the other but, in the real world, this could lead to a lot of problems, including system failure. Hence such dependencies need to be avoided.
+
+Spring IOC resolves such dependencies with Dependency Injection, which makes the code easier to test and reuse. Loose coupling between classes can be possible by defining interfaces for common functionality and the injector will instantiate the objects of required implementation. The task of instantiating objects is done by the container according to the configurations specified by the developer.
+### Types of Spring Dependency Injection:
+There are two types of Spring Dependency Injection. They are:
+**1-Setter Dependency Injection (SDI):** This is the simpler of the two DI methods. In this, the DI will be injected with the help of setter and/or getter methods. Now to set the DI as SDI in the bean, it is done through the bean-configuration file For this, the property to be set with the SDI is declared under the <property> tag in the bean-config file.
+
+```java
+package com.geeksforgeeks.org; 
+  
+import com.geeksforgeeks.org.IGeek; 
+  
+public class GFG { 
+  
+    // The object of the interface IGeek 
+    IGeek geek; 
+  
+    // Setter method for property geek 
+    public void setGeek(IGeek geek) 
+    { 
+        this.geek = geek; 
+    } 
+}
+```
+**Setting the SDI in the bean-config file:**
+```java
+
+
+<beans 
+xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"> 
+  
+    <bean id="GFG" class="com.geeksforgeeks.org.GFG"> 
+        <property name="geek"> 
+            <ref bean="CsvGFG" /> 
+        </property> 
+    </bean> 
+      
+<bean id="CsvGFG" class="com.geeksforgeeks.org.impl.CsvGFG" /> 
+<bean id="JsonGFG" class="com.geeksforgeeks.org.impl.JsonGFG" /> 
+          
+</beans>
+```
+**2-Constructor Dependency Injection (CDI):** In this, the DI will be injected with the help of contructors. Now to set the DI as CDI in bean, it is done through the bean-configuration file For this, the property to be set with the CDI is declared under the <constructor-arg> tag in the bean-config file.
+**Let us take the same example as of SDI**
+```java
+package com.geeksforgeeks.org; 
+  
+import com.geeksforgeeks.org.IGeek; 
+  
+public class GFG { 
+  
+    // The object of the interface IGeek 
+    IGeek geek; 
+  
+    // Constructor to set the CDI 
+    GFG(IGeek geek) 
+    { 
+        this.geek = geek; 
+    } 
+}
+```
+Setting the CDI in the bean-config file:
+
+```java
+<beans 
+xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"> 
+  
+    <bean id="GFG" class="com.geeksforgeeks.org.GFG"> 
+        <constructor-arg> 
+            <bean class="com.geeksforgeeks.org.impl.CsvGFG" /> 
+        </constructor-arg> 
+    </bean> 
+      
+<bean id="CsvGFG" class="com.geeksforgeeks.org.impl.CsvGFG" /> 
+<bean id="JsonGFG" class="com.geeksforgeeks.org.impl.JsonGFG" /> 
+          
+</beans>
+```
+
 
 
 
