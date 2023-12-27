@@ -567,6 +567,72 @@ Employee list:
 -Max
 -Sam
 ```
+## Autowiring
+Spring is an open-source application development framework of Java that allows you to create robust enterprise applications using Plain Old Java Objects (POJO in short). The Spring framework can inject dependencies automatically. The Spring container detects those dependencies specified in the configuration file and @ the relationship between the beans. This is referred to as autowiring in Spring. An autowired application requires fewer lines of code comparatively but at the same time, it provides very little flexibility to the programmer.
+### Modes of Autowiring
+**1. No**
+This mode tells the framework that autowiring is not supposed to be done. It is the default mode used by Spring.
+#### Example
+```java
+<bean id="state" class="sample.State"> 
+ <property name="name" value="UP" /> 
+</bean> 
+<bean id="city" class="sample.City"></bean>
+```
+**2. byName**
+It uses the name of the bean for injecting dependencies. However, it requires that the name of the property and bean must be the same. It invokes the setter method internally for autowiring.
+#### Example
+```java
+<bean id="state" class="sample.State"> 
+ <property name="name" value="UP" /> 
+</bean> 
+<bean id="city" class="sample.City" autowire="byName"></bean>
+```
+**3. byType**
+It injects the dependency according to the type of the bean. It looks up in the configuration file for the class type of the property. If it finds a bean that matches, it injects the property. If not, the program throws an error. The names of the property and bean can be different in this case. It invokes the setter method internally for autowiring.
+#### Example
+```java
+<bean id="state" class="sample.State"> 
+ <property name="name" value="UP" /> 
+</bean> 
+<bean id="city" class="sample.City" autowire="byType"></bean>
+```
+**4. constructor**
+It injects the required dependencies by invoking the constructor. It works similar to the “byType” mode but it looks for the class type of the constructor arguments. If none or more than one bean are detected, then it throws an error, otherwise, it autowires the “byType” on all constructor arguments.
+#### Example
+```java
+<bean id="state" class="sample.State"> 
+ <property name="name" value="UP" /> 
+</bean> 
+<bean id="city" class="sample.City" autowire="constructor"></bean>
+```
+**5. autodetect**
+The autodetect mode uses two other modes for autowiring – constructor and byType. It first tries to autowire via the constructor mode and if it fails, it uses the byType mode for autowiring. It works in Spring 2.0 and 2.5 but is deprecated from Spring 3.0 onwards.
+#### Example
+```java
+<bean id="state" class="sample.State"> 
+ <property name="name" value="UP" /> 
+</bean> 
+<bean id="city" class="sample.City" autowire="autodetect"></bean>
+```
+## init() and destroy() Methods
+During the Spring Application Development, sometimes when the spring beans are created developers are required to execute the initialization operations and the cleanup operations before the bean is destroyed. In the spring framework, we can use the init-method and the destroy-method labels in the bean configuration. 
+### init() Method
+In the real-world application init() method is the one you will find it everywhere. init-method is the attribute of the spring <bean> tag. It is utilized to declare a custom method for the bean that will act as the bean initialization method. We can define it as follows.
+```java
+<bean id="student" class="com.amiya.Student" init-method="myPostConstruct">
+```
+Here myPostConstruct() method is the bean initialization method in the Student class. This initialization method is called after initializing bean properties. We can use such an initialization method to validate the value of bean properties or initialize any task.
+### Why init()?
+-You can add custom code/logic during bean initialization
+
+-It can be used for setting up resources like database/socket/file etc.
+### destroy() Method
+The destroy() method will be called before the bean is removed from the container. destroy-method is bean attribute using which we can assign a custom bean method that will be called just before the bean is destroyed. To use the destroy-method attribute, we do as follows.
+```java
+<bean id="student" class="com.amiya.Student" destroy-method="myPreDestroy">
+```
+Here myPreDestroy() method will be defined in the Student class. Spring will call this method just before destroying the bean. destroy-method is used to release resources or perform some destruction task. DisposableBean interface in spring performs the same task but it is highly coupled to spring, so we should prefer destroy-method. So let’s understand these two methods with a simple example.
 
 
 
