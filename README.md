@@ -633,6 +633,117 @@ The destroy() method will be called before the bean is removed from the containe
 <bean id="student" class="com.amiya.Student" destroy-method="myPreDestroy">
 ```
 Here myPreDestroy() method will be defined in the Student class. Spring will call this method just before destroying the bean. destroy-method is used to release resources or perform some destruction task. DisposableBean interface in spring performs the same task but it is highly coupled to spring, so we should prefer destroy-method. So let’s understand these two methods with a simple example.
+## Inheriting Bean
+Constructor arguments, property values, and container-specific information like initialization method, static factory method name, and so on may all be found in a bean definition. A parent definition’s configuration data is passed down to a child bean definition. The child definition has the ability to override or add values as needed.
+
+Although Spring Bean’s definition of inheritance differs from Java class inheritance, the inheritance notion is the same. A parent bean definition can be used as a template, and other child beans can inherit the required configuration from it.
+### Implementation:
+**Step 1: Creation of ‘Customer’ class**
+```java
+package com.geeksforgeeks.beans.inheritance;
+// Class
+public class Customer {
+ 
+    // Class data members
+    private String name;
+    private String email;
+    private String country;
+ 
+    // Getters and setters
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+ 
+    public String getEmail() { return email; }
+    public void setEmail(String email)
+    {
+        // this keyword refers to current instance itself
+        this.email = email;
+    }
+ 
+    // Method
+    public String getCountry() { return country; }
+ 
+    // Setter
+    public void setCountry(String country)
+    {
+        this.country = country;
+    }
+ 
+    // Method
+    // To show message
+    @Override public String toString()
+    {
+        // Print corresponding customer attributes
+        return " Name:" + name + "\n Email:" + email
+            + "\n Country:" + country;
+    }
+}
+```
+**Step 2: Create a spring beans.xml file that demonstrates how to inherit the bean.**
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+ 
+    <bean id="baseCustomer" abstract="true">
+    <property name="country" value="India"/>
+    </bean>
+     
+    <bean id="customer" parent="baseCustomer" class="com.geeksforgeeks.beans.inheritance.Customer">
+    <property name="country" value="India"/>
+    <property name="name" value="Admin"/>
+    <property name="email" value="geeksforgeeks@gmail.com"/>
+    </bean>
+</beans>
+```
+We have defined 2 beans in the configuration file
+
+-Bean with the id base.
+
+-The customer is the parent bean, while the second bean with the same id is the child bean. As a result, the country property and its value are inherited by the child bean customer, who then adds two additional properties to it.
+**Step 3: Create a class that loads these two beans and displays the output with the inherited value.**
+```java
+
+// Java Program to Illustrate Bean Inheritance
+ 
+package com.geeksforgeeks.beans.inheritance;
+ 
+// Importing required classes
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+ 
+// Class
+public class BeanInheritanceTest {
+ 
+    // Main driver method
+    public static void main(String[] args)
+    {
+ 
+        // Inheriting Bean by customer
+        ClassPathXmlApplicationContext applicationContext
+            = new ClassPathXmlApplicationContext(
+                "beans.xml");
+ 
+        Customer customer
+            = (Customer)applicationContext.getBean(
+                "customer");
+ 
+        // Printing the customer info
+        System.out.println(customer.toString());
+    }
+}
+```
+**Output**
+Name:Admin
+
+Email:geeksforgeeks@gmail.com
+
+Country:India
+
 
 
 
