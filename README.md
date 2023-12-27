@@ -738,11 +738,83 @@ public class BeanInheritanceTest {
 }
 ```
 **Output**
+
 Name:Admin
 
 Email:geeksforgeeks@gmail.com
 
 Country:India
+
+## Spring Annotations
+Spring Annotations are a form of metadata that provides data about a program. Annotations are used to provide supplemental information about a program. It does not have a direct effect on the operation of the code they annotate. It does not change the action of the compiled program. 
+### Stereotype Annotations
+Spring Framework provides us with some special annotations. These annotations are used to create Spring beans automatically in the application context. @Component annotation is the main Stereotype Annotation. There are some Stereotype meta-annotations which is derived from @Component those are
+
+**@Service**
+**@Repository**
+**@Controller**
+
+**1: @Service:** We specify a class with @Service to indicate that they’re holding the business logic. Besides being used in the service layer, there isn’t any other special use for this annotation. The utility classes can be marked as Service classes.
+**2: @Repository:** We specify a class with @Repository to indicate that they’re dealing with CRUD operations, usually, it’s used with DAO (Data Access Object) or Repository implementations that deal with database tables.
+**3: @Controller:** We specify a class with @Controller to indicate that they’re front controllers and responsible to handle user requests and return the appropriate response. It is mostly used with REST Web Services.
+
+### @Required Annotation with Example
+The @Required annotation in spring is a method-level annotation used in the setter method of a bean property and therefore making the setter-injection compulsory. This annotation suggests that the required bean property must be injected with a value at the configuration time which we will show and explain in the following example. 
+#### Example
+Consider a class representing a Person with a required property name. We can use the @Required annotation to ensure that the name property is set before the bean is fully initialized.
+```java
+import org.springframework.beans.factory.annotation.Required;
+
+public class Person {
+    private String name;
+
+    @Required
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+```
+**Main.java**
+```java
+import org.springframework.beans.factory.BeanInitializationException;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class MainApp {
+
+    public static void main(String[] args) {
+        AbstractApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+        try {
+            // Attempt to get the Person bean
+            Person person = (Person) context.getBean("person");
+
+            // Display the person's name
+            System.out.println("Person's Name: " + person.getName());
+        } catch (BeanInitializationException e) {
+            System.err.println("Error: " + e.getMessage());
+        } finally {
+            context.close();
+        }
+    }
+}
+```
+**applicationContext.xml**
+```java
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Define the Person bean -->
+    <bean id="person" class="Person" />
+
+</beans>
+```
+
 
 
 
