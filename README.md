@@ -706,6 +706,7 @@ We have defined 2 beans in the configuration file
 -Bean with the id base.
 
 -The customer is the parent bean, while the second bean with the same id is the child bean. As a result, the country property and its value are inherited by the child bean customer, who then adds two additional properties to it.
+
 **Step 3: Create a class that loads these two beans and displays the output with the inherited value.**
 ```java
 
